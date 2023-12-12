@@ -12,11 +12,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.static('./assets'));
 // app.use('/uploads',express.static('./books'));
-app.use("/books", express.static("public/upload/books"));
-app.use("/users", express.static("public/upload/users"));
 app.get("/", (req, res) => {
   res.send("api is running");
 });
+app.use("/books", express.static("./public/upload/books"));
+app.use("/users", express.static("./public/upload/users"));
 
 app.use("/", require("./routes/home"));
 

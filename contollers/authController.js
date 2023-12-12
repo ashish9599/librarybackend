@@ -73,7 +73,7 @@ module.exports.changePassword = async function (req, res) {
   // checkAuth
   try {
     const { email, newPassword, confirmPassword } = req.body;
-
+   
     if (
       email &&
       newPassword &&
@@ -83,17 +83,25 @@ module.exports.changePassword = async function (req, res) {
       const genSalt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(newPassword, genSalt);
       const user = await User.findOne({ email: email });
-      await User.findByIdAndUpdate(user._id, {
-        password: hashedPassword,
-      });
+     
+      if(user){
+        await User.findByIdAndUpdate(user._id, {
+          password: hashedPassword,
+        });
+  
+        res
+          .status(200)
+          .json({ succuss: true, message: "Password change succussfully" });
+      }else{
+        res.status(400).json({ succuss: false, message: "User Not present" });
 
-      res
-        .status(200)
-        .json({ succuss: true, message: "Password change succussfully" });
+      }
+     
     } else {
       res.status(400).json({ succuss: false, message: "Wrong Credential" });
     }
   } catch (error) {
+    // console.log(error);
     res.status(400).json({ succuss: false, message: error });
   }
 };

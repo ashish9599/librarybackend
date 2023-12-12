@@ -71,7 +71,10 @@ exports.updateBook = async (req, res) => {
     console.log(req.body);
     const { id } = req.params;
 
-    if (name && desciption && price &&qty&& author && category && language) {
+    if (name==="" && desciption==="" && price==="" &&qty===""&& author==="" && category==="" && language==="") {
+     
+      res.status(200).json({ succuss: false, message: "Invalid Credential" });
+    } else {
       let book = await BOOK.findByIdAndUpdate(id, {
         name,
         desciption,
@@ -90,8 +93,6 @@ exports.updateBook = async (req, res) => {
         message: "Book updated sucessfuly",
         // book: newBook,
       });
-    } else {
-      res.status(400).json({ succuss: false, message: "Invalid Credential" });
     }
   } catch (error) {
     console.log(error);
