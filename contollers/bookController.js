@@ -5,8 +5,11 @@ exports.addbook = async (req, res) => {
     const { name, desciption, price,qty, available, author, category, language } =
       req.body;
    
-    if (name && desciption && price &&qty&&author && category) {
-    const newBook=  await BOOK.create({
+    if (name==="" && desciption==="" && price==="" &&qty===""&&author==="" && category==="") {
+   
+      res.status(200).json({ succuss: false, message: "Invalid Credential" });
+    } else {
+      const newBook=  await BOOK.create({
         name,
         desciption,
         price,
@@ -26,8 +29,6 @@ exports.addbook = async (req, res) => {
           message: "Book added sucessfuly",
           book: newBook,
         });
-    } else {
-      res.status(400).json({ succuss: false, message: "Invalid Credential" });
     }
   } catch (error) {
     console.log(error);
