@@ -5,7 +5,10 @@ const jwt = require("jsonwebtoken");
 exports.creatUser = async (req, res) => {
   const { name, email, password } = req.body;
   try {
-    if (name && email && password) {
+    if (name==="" && email ===""&& password==="") {
+      
+      res.status(400).json({ succuss: false, message: "Wrong Credential" });
+    } else {
       const user = await User.findOne({ email: email });
       if (!user) {
         // hashing of password
@@ -25,8 +28,6 @@ exports.creatUser = async (req, res) => {
           .status(200)
           .json({ succuss: false, message: "You are already registered" });
       }
-    } else {
-      res.status(400).json({ succuss: false, message: "Wrong Credential" });
     }
   } catch (error) {
     res.status(400).json({ succuss: false, message: error });

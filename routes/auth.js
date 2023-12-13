@@ -11,7 +11,7 @@ const { checkAuth } = require("../config/middleware");
 const { userImageMulter } = require("../config/storage");
 const router = express.Router();
 
-router.post("/signIN", userImageMulter, creatUser);
+router.post("/signIN", creatUser);
 router.post("/login", loginUser);
 router.post("/changePassword", changePassword);
 

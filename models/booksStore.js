@@ -52,7 +52,6 @@ const Book = new Schema(
   },
   {
     writeConcern: {
-      w: 'majority',
       j: true,
       wtimeout: 1000
     }

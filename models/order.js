@@ -23,7 +23,7 @@ const order = new Schema(
     timestamps: true,
   },{
     writeConcern: {
-      w: 'majority',
+      
       j: true,
       wtimeout: 1000
     }
