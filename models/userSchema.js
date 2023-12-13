@@ -10,16 +10,16 @@ const Users = new Schema(
     userImage: {
       type: String,
     },
+
   },
+ { writeConcern: {
+    j: true,
+    wtimeout: 1000
+  }
+},
   {
     timestamps: true,
-  },{
-    writeConcern: {
-     
-      j: true,
-      wtimeout: 1000
-    }
-  }
+  },
 );
 
 module.exports = mongoose.model("User", Users);
