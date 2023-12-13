@@ -7,8 +7,9 @@ exports.creatUser = async (req, res) => {
   try {
     if (name==="" && email ===""&& password==="") {
       
-      res.status(400).json({ succuss: false, message: "Wrong Credential" });
+      res.status(200).json({ succuss: false, message: "Wrong Credential" });
     } else {
+      console.log(req.file);
       const user = await User.findOne({ email: email });
       if (!user) {
         // hashing of password
@@ -38,7 +39,12 @@ exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     // console.log(email,password)
-    if (email && password) {
+    if (email==="" && password==="") {
+     
+      res
+        .status(400)
+        .json({ succuss: false, message: "Not get Invalid Credential" });
+    } else {
       const user = await User.findOne({ email: email });
 
       if (
@@ -58,10 +64,6 @@ exports.loginUser = async (req, res) => {
       } else {
         res.status(400).json({ succuss: false, message: "Invalid Credential" });
       }
-    } else {
-      res
-        .status(400)
-        .json({ succuss: false, message: "Not get Invalid Credential" });
     }
   } catch (error) {
     res.status(400).json({ succuss: false, message: "error" });
@@ -111,7 +113,10 @@ module.exports.update = async function (req, res) {
   // checkAuth
   try {
     const { name, email, userImage } = req.body;
-    if (name && email) {
+    if (name ===""&& email==="") {
+     
+      res.status(200).json({ succuss: false, message: "Wrong Credential" });
+    } else {
       const newUser = await User.findByIdAndUpdate(req.user._id, {
         name,
         email,
@@ -132,8 +137,6 @@ module.exports.update = async function (req, res) {
           token,
           user: user,
         });
-    } else {
-      res.status(400).json({ succuss: false, message: "Wrong Credential" });
     }
   } catch (error) {
     res.status(400).json({ succuss: false, message: error });
