@@ -47,15 +47,15 @@ const Book = new Schema(
       default: new Date(),
     },
   },
+  { writeConcern: {
+    j: true,
+    wtimeout: 1000
+  }
+},
   {
     timestamps: true,
   },
-  {
-    writeConcern: {
-      j: true,
-      wtimeout: 1000
-    }
-  }
+  
 );
 
 module.exports = mongoose.model("Book", Book);

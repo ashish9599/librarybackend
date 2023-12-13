@@ -19,15 +19,14 @@ const order = new Schema(
       ref: "User",
     },
   },
+  { writeConcern: {
+    j: true,
+    wtimeout: 1000
+  }
+},
   {
     timestamps: true,
-  },{
-    writeConcern: {
-      
-      j: true,
-      wtimeout: 1000
-    }
-  }
+  },
 );
 
 module.exports = mongoose.model("Order", order);
