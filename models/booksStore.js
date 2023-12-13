@@ -49,6 +49,13 @@ const Book = new Schema(
   },
   {
     timestamps: true,
+  },
+  {
+    writeConcern: {
+      w: 'majority',
+      j: true,
+      wtimeout: 1000
+    }
   }
 );
 

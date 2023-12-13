@@ -4,7 +4,7 @@ exports.addbook = async (req, res) => {
   try {
     const { name, desciption, price,qty, available, author, category, language } =
       req.body;
-   
+   console.log( name, desciption, price,qty, available, author, category, language)
     if (name==="" && desciption==="" && price==="" &&qty===""&&author==="" && category==="") {
    
       res.status(200).json({ succuss: false, message: "Invalid Credential" });
