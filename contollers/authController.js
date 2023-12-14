@@ -46,7 +46,8 @@ exports.loginUser = async (req, res) => {
         .json({ succuss: false, message: "Not get Invalid Credential" });
     } else {
       const user = await User.findOne({ email: email });
-
+      // const all = await User.find({  });
+//  console.log(user);
       if (
         user &&
         user.email === email &&
