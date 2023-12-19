@@ -47,7 +47,7 @@ exports.loginUser = async (req, res) => {
     } else {
       const user = await User.findOne({ email: email });
       // const all = await User.find({  });
-//  console.log(user);
+//  console.log(all);
       if (
         user &&
         user.email === email &&
